@@ -41,6 +41,7 @@
 			this.txtBoxCmd.Name = "txtBoxCmd";
 			this.txtBoxCmd.Size = new System.Drawing.Size(203, 281);
 			this.txtBoxCmd.TabIndex = 0;
+			this.txtBoxCmd.TextChanged += new System.EventHandler(this.txtBoxCmd_TextChanged);
 			// 
 			// RunBtn
 			// 
@@ -50,6 +51,7 @@
 			this.RunBtn.TabIndex = 1;
 			this.RunBtn.Text = "Run";
 			this.RunBtn.UseVisualStyleBackColor = true;
+			this.RunBtn.Click += new System.EventHandler(this.RunBtn_Click);
 			// 
 			// DrawingArea
 			// 
@@ -57,8 +59,10 @@
 			this.DrawingArea.Location = new System.Drawing.Point(361, 27);
 			this.DrawingArea.Name = "DrawingArea";
 			this.DrawingArea.Size = new System.Drawing.Size(541, 416);
+			this.DrawingArea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.DrawingArea.TabIndex = 2;
 			this.DrawingArea.TabStop = false;
+			this.DrawingArea.Click += new System.EventHandler(this.DrawingArea_Click);
 			// 
 			// Form1
 			// 
