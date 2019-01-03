@@ -8,6 +8,7 @@ namespace TurtleGraphics
 {
 	class ShapeFactory
 	{
+		//if user type a shape, it will call its corresponding class and returns a new shape.
 		public Shape getShape(String shapeType)
 		{
 			//this is to allow user for any case combination
@@ -27,10 +28,14 @@ namespace TurtleGraphics
 			{
 				return new Square();
 			}
-			
+			else if (shapeType.Equals("TRIANGLE"))
+			{
+				return new Triangle();
+			}
+
 			else
 			{
-				//if we get here then what has been passed in is inkown so throw an appropriate exception
+				//exception called argEx will be called if the shapetype that's been passed in is unkown
 				System.ArgumentException argEx = new System.ArgumentException("Factory error: " + shapeType + " does not exist");
 				throw argEx;
 			}

@@ -28,53 +28,65 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.txtBoxCmd = new System.Windows.Forms.TextBox();
-			this.RunBtn = new System.Windows.Forms.Button();
-			this.DrawingArea = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.DrawingArea)).BeginInit();
+			this.txtBox = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.RunButton = new System.Windows.Forms.Button();
+			this.pictureBox = new System.Windows.Forms.PictureBox();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// txtBoxCmd
+			// txtBox
 			// 
-			this.txtBoxCmd.Location = new System.Drawing.Point(12, 50);
-			this.txtBoxCmd.Multiline = true;
-			this.txtBoxCmd.Name = "txtBoxCmd";
-			this.txtBoxCmd.Size = new System.Drawing.Size(203, 281);
-			this.txtBoxCmd.TabIndex = 0;
-			this.txtBoxCmd.TextChanged += new System.EventHandler(this.txtBoxCmd_TextChanged);
+			this.txtBox.Location = new System.Drawing.Point(12, 57);
+			this.txtBox.Multiline = true;
+			this.txtBox.Name = "txtBox";
+			this.txtBox.Size = new System.Drawing.Size(184, 312);
+			this.txtBox.TabIndex = 0;
 			// 
-			// RunBtn
+			// label1
 			// 
-			this.RunBtn.Location = new System.Drawing.Point(140, 337);
-			this.RunBtn.Name = "RunBtn";
-			this.RunBtn.Size = new System.Drawing.Size(75, 23);
-			this.RunBtn.TabIndex = 1;
-			this.RunBtn.Text = "Run";
-			this.RunBtn.UseVisualStyleBackColor = true;
-			this.RunBtn.Click += new System.EventHandler(this.RunBtn_Click);
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(12, 27);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(86, 18);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Commands";
 			// 
-			// DrawingArea
+			// RunButton
 			// 
-			this.DrawingArea.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.DrawingArea.Location = new System.Drawing.Point(361, 27);
-			this.DrawingArea.Name = "DrawingArea";
-			this.DrawingArea.Size = new System.Drawing.Size(541, 416);
-			this.DrawingArea.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.DrawingArea.TabIndex = 2;
-			this.DrawingArea.TabStop = false;
-			this.DrawingArea.Click += new System.EventHandler(this.DrawingArea_Click);
+			this.RunButton.Location = new System.Drawing.Point(121, 375);
+			this.RunButton.Name = "RunButton";
+			this.RunButton.Size = new System.Drawing.Size(75, 23);
+			this.RunButton.TabIndex = 2;
+			this.RunButton.Text = "Run";
+			this.RunButton.UseVisualStyleBackColor = true;
+			this.RunButton.Click += new System.EventHandler(this.RunButton_Click);
+			// 
+			// pictureBox
+			// 
+			this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.pictureBox.Location = new System.Drawing.Point(347, 64);
+			this.pictureBox.Name = "pictureBox";
+			this.pictureBox.Size = new System.Drawing.Size(516, 348);
+			this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBox.TabIndex = 3;
+			this.pictureBox.TabStop = false;
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(914, 450);
-			this.Controls.Add(this.DrawingArea);
-			this.Controls.Add(this.RunBtn);
-			this.Controls.Add(this.txtBoxCmd);
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ClientSize = new System.Drawing.Size(894, 432);
+			this.Controls.Add(this.pictureBox);
+			this.Controls.Add(this.RunButton);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.txtBox);
 			this.Name = "Form1";
-			this.Text = "Form1";
-			((System.ComponentModel.ISupportInitialize)(this.DrawingArea)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -85,6 +97,10 @@
 		private System.Windows.Forms.TextBox txtBoxCmd;
 		private System.Windows.Forms.Button RunBtn;
 		private System.Windows.Forms.PictureBox DrawingArea;
+		private System.Windows.Forms.TextBox txtBox;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button RunButton;
+		private System.Windows.Forms.PictureBox pictureBox;
 	}
 }
 

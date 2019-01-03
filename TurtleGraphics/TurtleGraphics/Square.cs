@@ -11,6 +11,7 @@ namespace TurtleGraphics
 	{
 		private int size;
 
+		//constructor of square
 		public Square() : base()
 		{
 

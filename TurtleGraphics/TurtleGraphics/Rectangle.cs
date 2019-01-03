@@ -9,6 +9,7 @@ namespace TurtleGraphics
 {
 	class Rectangle: Shape
 	{
+		//variables used to store value of width nd height of rectangle
 		int width, height;
 		public Rectangle() : base()
 		{
@@ -18,7 +19,7 @@ namespace TurtleGraphics
 		public Rectangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
 		{
 
-			this.width = width; //the only thingthat is different from shape
+			this.width = width; //the only thing that is different from shape
 			this.height = height;
 		}
 
@@ -30,10 +31,10 @@ namespace TurtleGraphics
 			this.height = list[3];
 
 		}
-
+		//draw method for rectangle
 		public override void draw(Graphics g)
 		{
-			Pen p = new Pen(Color.Black, 2);
+			Pen p = new Pen(Color.AliceBlue, 2);
 			SolidBrush b = new SolidBrush(colour);
 			g.FillRectangle(b, x, y, width, height);
 			g.DrawRectangle(p, x, y, width, height);
