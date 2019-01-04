@@ -32,7 +32,10 @@ namespace TurtleGraphics
 			{
 				return new Triangle();
 			}
-
+			else if (shapeType.Equals("POLYGON"))
+			{
+				return new Polygon();
+			}
 			else
 			{
 				//exception called argEx will be called if the shapetype that's been passed in is unkown
