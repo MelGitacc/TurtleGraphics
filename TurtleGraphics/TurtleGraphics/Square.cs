@@ -10,18 +10,19 @@ namespace TurtleGraphics
 	class Square :Rectangle
 	{
 		private int size;
-
+		
 		//constructor of square
 		public Square() : base()
 		{
-
+			
 		}
 		public Square(Color colour, int x, int y, int size) : base(colour, x, y, size, size)
 		{
 			this.size = size;
 		}
-
-		//no draw method here because it is provided by the parent class Rectangle
+	
+		//since we are using Rectangle class, no need to implement this section as the draw method for rectangle
+		//will be inherited from here
 		public override void draw(Graphics g)
 		{
 			base.draw(g);

@@ -28,6 +28,7 @@ namespace TurtleGraphics
 		String MultiLine;//this is for the string array line
 		int width;//for rectangle
 		int height;//for rectangle
+		int size;
 		Image file;
 
 		public Form1()
@@ -58,20 +59,20 @@ namespace TurtleGraphics
 					//split line using space for user to input value of x and y
 					String[] line = MultiLine.Split(new string[] { " ", " " }, StringSplitOptions.RemoveEmptyEntries);
 
-					if (line[0].Equals("circle"))
+
+					if (line[0].ToLower().Equals("circle"))
 					{
 						//draw circle
 						
-						shp = factory.getShape("circle");
-						radius = int.Parse(line[1]);// 
-						shp.set(newColour, x, y, radius);//this is the bit where it is different for other shapes
-						shp.draw(g);
-						y = y + (radius * 2);//this will dertermine the next position of x
-						x = x + (radius * 2);
-						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
-
+								shp = factory.getShape("circle");
+								radius = int.Parse(line[1]);// 
+								shp.set(newColour, x, y, radius);//this is the bit where it is different for other shapes
+								shp.draw(g);
+								y = y + (radius * 2);//this will dertermine the next position of x
+								x = x + (radius * 2);
+								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 					}
-					else if (line[0].Equals("rectangle")) 
+					else if (line[0].ToLower().Equals("rectangle")) 
 					{
 					
 						//darw rectangle
@@ -86,7 +87,7 @@ namespace TurtleGraphics
 						pictureBox.Refresh();
 
 					}
-					else if (line[0].Equals("triangle"))
+					else if (line[0].ToLower().Equals("triangle"))
 					{
 						int point0x, point0y, point1X, point1Y, point2X, point2Y;
 						//draw a triangle
@@ -104,55 +105,20 @@ namespace TurtleGraphics
 						x = x + (height * 2);
 						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 					}
-					else if (line[0].Equals("square"))
+					else if (line[0].ToLower().Equals("square"))
 					{
-						//int size = 0 ;
-											 //draw a square
+						//draw a square
 						shp = factory.getShape("square");
-						width = int.Parse(line[1]);//
+						width= int.Parse(line[1]);
 						height = int.Parse(line[2]);
 						shp.set(Color.LightSteelBlue, x, y, width,height);
-						
+
 						shp.draw(g);
 						y = y + (width * 2);//this will dertermine the next position of x
 						x = x + (height * 2);
 						pictureBox.Refresh();// clears the picture box if user delete the shape from the text box
 					}
-					else if (line[0].Equals("drawto"))//completed
-					{
-					
-						Pen myPen = new Pen(Color.Black);
-						try
-						{
-							g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
-							//clears the picture box if user delete the shape from the text box
-							pictureBox.Refresh();
-						}
-						catch (Exception)
-						{
-
-						}
-					}
-					
-					else if (line[0].Equals("moveto"))
-					{
-						//this will allow user to input integer alongside the moveTo word
-						
-						x = int.Parse(line[1]);
-						y = int.Parse(line[2]);	
-						
-					}
-					else if (line[0].Equals("penup"))
-					{
-						penDown = false; //this is for penup command
-
-					}
-					else if (line[0].Equals("pendown"))
-					{
-						penDown = true; ////this is for pendown command
-					}
-
-					else if (line[0].Equals("polygon"))
+					else if (line[0].ToLower().Equals("polygon"))
 					{
 						int point0x, point0y, point1X, point1Y, point2X, point2Y;
 						//draw a triangle
@@ -170,6 +136,44 @@ namespace TurtleGraphics
 						x = x + (height * 2);
 						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 					}
+					else if (line[0].ToLower().Equals("drawto"))//completed
+					{
+						
+
+						Pen myPen = new Pen(Color.Black);
+						try
+						{
+							g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
+							//clears the picture box if user delete the shape from the text box
+							y = y + (width * 2);//this will dertermine the next position of x
+							x = x + (height * 2);
+							pictureBox.Refresh();
+						}
+						catch (Exception ex)
+						{
+							Console.WriteLine("An error occurred: '{0}'", ex);
+						}
+					}
+					
+					else if (line[0].ToLower().Equals("moveto"))
+					{
+						//this will allow user to input integer alongside the moveTo word
+						
+						x = int.Parse(line[1]);
+						y = int.Parse(line[2]);	
+						
+					}
+					else if (line[0].ToLower().Equals("penup"))
+					{
+						penDown = false; //this is for penup command
+
+					}
+					else if (line[0].ToLower().Equals("pendown"))
+					{
+						penDown = true; ////this is for pendown command
+					}
+
+					
 				}
 
 				}
@@ -190,13 +194,20 @@ namespace TurtleGraphics
 		//allows user to open an image file 
 		private void menuOpen_Click(object sender, EventArgs e)
 		{
-			OpenFileDialog open = new OpenFileDialog();
-			open.Filter = "Image Files (*.jpg; *.bmp; *.png)|*.jpg;*.bmp; *.png";
-
-			if (open.ShowDialog() == DialogResult.OK)
+			try
 			{
-				txtBox.Text = open.FileName;
-				pictureBox.Image = new Bitmap(open.FileName);
+				OpenFileDialog open = new OpenFileDialog();
+				open.Filter = "Image Files (*.jpg; *.bmp; *.png)|*.jpg;*.bmp; *.png";
+
+				if (open.ShowDialog() == DialogResult.OK)
+				{
+					txtBox.Text = open.FileName;
+					pictureBox.Image = new Bitmap(open.FileName);
+				}
+			}
+			catch (IOException ex)
+			{
+				Console.WriteLine("An error occurred: '{0}'", ex);
 			}
 		}
 
@@ -206,19 +217,25 @@ namespace TurtleGraphics
 		
 			
 		}
-		//allows user to save drawing to Images folder 
+		//allows user to save drawing 
 		private void menuSave_Click(object sender, EventArgs e)
 		{
-			
-			SaveFileDialog save = new SaveFileDialog();
-			save.Filter = "All Files|*.*|Bitmap Files (*)|*.bmp;*.jpg*";
-			if (save.ShowDialog() == DialogResult.OK)
+			try
 			{
-				pictureBox.Image.Save(save.FileName,System.Drawing.Imaging.ImageFormat.Bmp);
-			
-				label2.Text = "Saved Successfully!";
+				SaveFileDialog save = new SaveFileDialog();
+				save.Filter = "All Files|*.*|Bitmap Files (*)|*.bmp;*.jpg*";
+				if (save.ShowDialog() == DialogResult.OK)
+				{
+					pictureBox.Image.Save(save.FileName, System.Drawing.Imaging.ImageFormat.Bmp);
+
+					//display the message when image file is saved successfully
+					label2.Text = "Saved Successfully!";
+				}
 			}
-			
+			catch (IOException ex)
+			{
+				Console.WriteLine("An error occurred: '{0}'", ex);
+			}
 		}
 	}
 }
