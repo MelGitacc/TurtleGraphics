@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,13 +28,12 @@ namespace TurtleGraphics
 		String MultiLine;//this is for the string array line
 		int width;//for rectangle
 		int height;//for rectangle
-		
-			
+		Image file;
+
 		public Form1()
 		{
 			InitializeComponent();
 		}
-
 
 
 		private void RunButton_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace TurtleGraphics
 					//split line using space for user to input value of x and y
 					String[] line = MultiLine.Split(new string[] { " ", " " }, StringSplitOptions.RemoveEmptyEntries);
 
-					if (line[0].Equals("circle"))//working properly
+					if (line[0].Equals("circle"))
 					{
 						//draw circle
 						
@@ -68,10 +68,10 @@ namespace TurtleGraphics
 						shp.draw(g);
 						y = y + (radius * 2);//this will dertermine the next position of x
 						x = x + (radius * 2);
-						pictureBox.Refresh();//clears the picture box
-						
+						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+
 					}
-					else if (line[0].Equals("rectangle"))//working properly 
+					else if (line[0].Equals("rectangle")) 
 					{
 					
 						//darw rectangle
@@ -86,7 +86,7 @@ namespace TurtleGraphics
 						pictureBox.Refresh();
 
 					}
-					else if (line[0].Equals("triangle"))// working fine
+					else if (line[0].Equals("triangle"))
 					{
 						int point0x, point0y, point1X, point1Y, point2X, point2Y;
 						//draw a triangle
@@ -102,9 +102,9 @@ namespace TurtleGraphics
 						shp.draw(g);
 						y = y + (width * 2);//this will dertermine the next position of x
 						x = x + (height * 2);
-						pictureBox.Refresh();// clears the picture box
+						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 					}
-					else if (line[0].Equals("square"))// working fine
+					else if (line[0].Equals("square"))
 					{
 						//int size = 0 ;
 											 //draw a square
@@ -116,15 +116,16 @@ namespace TurtleGraphics
 						shp.draw(g);
 						y = y + (width * 2);//this will dertermine the next position of x
 						x = x + (height * 2);
-						pictureBox.Refresh();// clears the picture box
+						pictureBox.Refresh();// clears the picture box if user delete the shape from the text box
 					}
-					else if (line[0].Equals("drawTo"))//completed
+					else if (line[0].Equals("drawto"))//completed
 					{
 					
 						Pen myPen = new Pen(Color.Black);
 						try
 						{
 							g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
+							//clears the picture box if user delete the shape from the text box
 							pictureBox.Refresh();
 						}
 						catch (Exception)
@@ -133,7 +134,7 @@ namespace TurtleGraphics
 						}
 					}
 					
-					else if (line[0].Equals("moveTo"))
+					else if (line[0].Equals("moveto"))
 					{
 						//this will allow user to input integer alongside the moveTo word
 						
@@ -141,23 +142,23 @@ namespace TurtleGraphics
 						y = int.Parse(line[2]);	
 						
 					}
-					else if (line[0].Equals("penUp"))
+					else if (line[0].Equals("penup"))
 					{
 						penDown = false; //this is for penup command
 
 					}
-					else if (line[0].Equals("penDown"))
+					else if (line[0].Equals("pendown"))
 					{
 						penDown = true; ////this is for pendown command
 					}
 
-					else if (line[0].Equals("polygon"))// working fine
+					else if (line[0].Equals("polygon"))
 					{
 						int point0x, point0y, point1X, point1Y, point2X, point2Y;
 						//draw a triangle
 						shp = factory.getShape("polygon");
-						point0x = int.Parse(line[1]);//
-						point0y = int.Parse(line[2]);//
+						point0x = int.Parse(line[1]);
+						point0y = int.Parse(line[2]);
 						point1X = int.Parse(line[3]);
 						point1Y = int.Parse(line[4]);
 						point2X = int.Parse(line[5]);
@@ -167,7 +168,7 @@ namespace TurtleGraphics
 						shp.draw(g);
 						y = y + (width * 2);//this will dertermine the next position of x
 						x = x + (height * 2);
-						pictureBox.Refresh();// clears the picture box
+						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 					}
 				}
 
@@ -186,9 +187,17 @@ namespace TurtleGraphics
 			Application.Exit();
 		}
 
+		//allows user to open an image file 
 		private void menuOpen_Click(object sender, EventArgs e)
 		{
-			
+			OpenFileDialog open = new OpenFileDialog();
+			open.Filter = "Image Files (*.jpg; *.bmp; *.png)|*.jpg;*.bmp; *.png";
+
+			if (open.ShowDialog() == DialogResult.OK)
+			{
+				txtBox.Text = open.FileName;
+				pictureBox.Image = new Bitmap(open.FileName);
+			}
 		}
 
 		private void pictureBox_Click(object sender, EventArgs e)
@@ -197,6 +206,19 @@ namespace TurtleGraphics
 		
 			
 		}
-
+		//allows user to save drawing to Images folder 
+		private void menuSave_Click(object sender, EventArgs e)
+		{
+			
+			SaveFileDialog save = new SaveFileDialog();
+			save.Filter = "All Files|*.*|Bitmap Files (*)|*.bmp;*.jpg*";
+			if (save.ShowDialog() == DialogResult.OK)
+			{
+				pictureBox.Image.Save(save.FileName,System.Drawing.Imaging.ImageFormat.Bmp);
+			
+				label2.Text = "Saved Successfully!";
+			}
+			
+		}
 	}
 }

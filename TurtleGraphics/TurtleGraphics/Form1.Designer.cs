@@ -39,6 +39,7 @@
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.label2 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -77,9 +78,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.pictureBox.Location = new System.Drawing.Point(347, 64);
+			this.pictureBox.Location = new System.Drawing.Point(214, 12);
 			this.pictureBox.Name = "pictureBox";
-			this.pictureBox.Size = new System.Drawing.Size(516, 415);
+			this.pictureBox.Size = new System.Drawing.Size(680, 480);
 			this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.pictureBox.TabIndex = 3;
 			this.pictureBox.TabStop = false;
@@ -118,6 +119,7 @@
 			this.menuSave.Name = "menuSave";
 			this.menuSave.Size = new System.Drawing.Size(180, 22);
 			this.menuSave.Text = "Save";
+			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -137,14 +139,23 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
 			this.aboutToolStripMenuItem.Text = "About";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(12, 445);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(0, 13);
+			this.label2.TabIndex = 5;
 			// 
 			// Form1
 			// 
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ClientSize = new System.Drawing.Size(894, 499);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.pictureBox);
 			this.Controls.Add(this.RunButton);
 			this.Controls.Add(this.label1);
@@ -177,6 +188,7 @@
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+		private System.Windows.Forms.Label label2;
 	}
 }
 
