@@ -110,21 +110,21 @@
 			// menuOpen
 			// 
 			this.menuOpen.Name = "menuOpen";
-			this.menuOpen.Size = new System.Drawing.Size(180, 22);
+			this.menuOpen.Size = new System.Drawing.Size(103, 22);
 			this.menuOpen.Text = "Open";
 			this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
 			// 
 			// menuSave
 			// 
 			this.menuSave.Name = "menuSave";
-			this.menuSave.Size = new System.Drawing.Size(180, 22);
+			this.menuSave.Size = new System.Drawing.Size(103, 22);
 			this.menuSave.Text = "Save";
 			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -139,8 +139,9 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.aboutToolStripMenuItem.Text = "About";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// label2
 			// 

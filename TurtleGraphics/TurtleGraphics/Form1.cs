@@ -17,8 +17,6 @@ namespace TurtleGraphics
 	public partial class Form1 : Form
 	{
 		
-		ArrayList shapes = new ArrayList();
-		int numLines = 0;
 		bool penDown = true;
 
 		Color newColour = Color.LightBlue;//initialising new colour
@@ -29,7 +27,7 @@ namespace TurtleGraphics
 		int width;//for rectangle
 		int height;//for rectangle
 		int size;
-		Image file;
+		int point0x, point0y, point1X, point1Y, point2X, point2Y;
 
 		public Form1()
 		{
@@ -46,143 +44,182 @@ namespace TurtleGraphics
 				String text = txtBox.Text;
 			x = 0;
 			y = 0;
-
+			point0x = 0; point0y = 0; point1X = 0; point1Y = 0; point2X = 0; point2Y = 0; 
 			//this is going to split the lines in text box when useer type series of shapes
 			String[] cmdList = text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
 			//this allow the shpaes to be display in picture box
 			using (var g = Graphics.FromImage(pictureBox.Image))
 			{
+				
 				for (int i = 0; i < cmdList.Length; i++)
 				{
 					MultiLine = cmdList[i];//store the current line in text box (for loop)
+
 					//split line using space for user to input value of x and y
 					String[] line = MultiLine.Split(new string[] { " ", " " }, StringSplitOptions.RemoveEmptyEntries);
-
-
-					if (line[0].ToLower().Equals("circle"))
+					try
 					{
-						//draw circle
-						
+						if (line[0].Length >= 1)
+						{
+							if (line[0].ToLower().Equals("circle"))
+							{
+								//draw circle
+
 								shp = factory.getShape("circle");
-								radius = int.Parse(line[1]);// 
+								radius = int.Parse(line[1]);
 								shp.set(newColour, x, y, radius);//this is the bit where it is different for other shapes
 								shp.draw(g);
-								y = y + (radius * 2);//this will dertermine the next position of x
-								x = x + (radius * 2);
+								x = y + (radius * 2);//this will dertermine the next position of x
+
 								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
-					}
-					else if (line[0].ToLower().Equals("rectangle")) 
-					{
-					
-						//darw rectangle
-						shp = factory.getShape("rectangle");
-						width = int.Parse(line[1]);//
-						height = int.Parse(line[2]);
-						shp.set(Color.Violet,x, y,width,height);
-						shp.draw(g);
-						
-						y = y + (width * 2);//this will dertermine the next position of x
-						x = x + (height * 2);
-						pictureBox.Refresh();
+							}
 
-					}
-					else if (line[0].ToLower().Equals("triangle"))
-					{
-						int point0x, point0y, point1X, point1Y, point2X, point2Y;
-						//draw a triangle
-						shp = factory.getShape("triangle");
-						point0x = int.Parse(line[1]);//
-						point0y = int.Parse(line[2]);//
-						point1X = int.Parse(line[3]);
-						point1Y = int.Parse(line[4]);
-						point2X = int.Parse(line[5]);
-						point2Y = int.Parse(line[6]);
-						shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
-						
-						shp.draw(g);
-						y = y + (width * 2);//this will dertermine the next position of x
-						x = x + (height * 2);
-						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
-					}
-					else if (line[0].ToLower().Equals("square"))
-					{
-						//draw a square
-						shp = factory.getShape("square");
-						width= int.Parse(line[1]);
-						height = int.Parse(line[2]);
-						shp.set(Color.LightSteelBlue, x, y, width,height);
+							else if (line[0].ToLower().Equals("rectangle"))
+							{
 
-						shp.draw(g);
-						y = y + (width * 2);//this will dertermine the next position of x
-						x = x + (height * 2);
-						pictureBox.Refresh();// clears the picture box if user delete the shape from the text box
-					}
-					else if (line[0].ToLower().Equals("polygon"))
-					{
-						int point0x, point0y, point1X, point1Y, point2X, point2Y;
-						//draw a triangle
-						shp = factory.getShape("polygon");
-						point0x = int.Parse(line[1]);
-						point0y = int.Parse(line[2]);
-						point1X = int.Parse(line[3]);
-						point1Y = int.Parse(line[4]);
-						point2X = int.Parse(line[5]);
-						point2Y = int.Parse(line[6]);
-						shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
+								//darw rectangle
+								shp = factory.getShape("rectangle");
+								width = int.Parse(line[1]);//
+								height = int.Parse(line[2]);
+								shp.set(Color.Violet, x, y, width, height);
+								shp.draw(g);
+								x = y + (width * 2);
+								//y = x + (height * 2);//this will dertermine the next position of x
+								pictureBox.Refresh();
 
-						shp.draw(g);
-						y = y + (width * 2);//this will dertermine the next position of x
-						x = x + (height * 2);
-						pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
-					}
-					else if (line[0].ToLower().Equals("drawto"))//completed
-					{
-						
+							}
+							else if (line[0].ToLower().Equals("triangle"))
+							{
+								//int point0x, point0y, point1X, point1Y, point2X, point2Y;
+								//draw a triangle
+								shp = factory.getShape("triangle");
+								point0x = int.Parse(line[1]);//
+								point0y = int.Parse(line[2]);//
+								point1X = int.Parse(line[3]);
+								point1Y = int.Parse(line[4]);
+								point2X = int.Parse(line[5]);
+								point2Y = int.Parse(line[6]);
+								shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
 
-						Pen myPen = new Pen(Color.Black);
-						try
-						{
-							g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
-							//clears the picture box if user delete the shape from the text box
-							y = y + (width * 2);//this will dertermine the next position of x
-							x = x + (height * 2);
-							pictureBox.Refresh();
+								shp.draw(g);
+								x = y + (width * 2);//this will dertermine the next position of x
+													//y = x + (height * 2);
+								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+							}
+							else if (line[0].ToLower().Equals("square"))
+							{
+								//draw a square
+								shp = factory.getShape("square");
+								width = int.Parse(line[1]);
+								height = int.Parse(line[2]);
+								shp.set(Color.LightSteelBlue, x, y, width, height);
+
+								shp.draw(g);
+								x = y + (width * 2);//this will dertermine the next position of x
+													//y = x + (height * 2);
+								pictureBox.Refresh();// clears the picture box if user delete the shape from the text box
+							}
+							else if (line[0].ToLower().Equals("polygon"))
+							{
+								//	int point0x, point0y, point1X, point1Y, point2X, point2Y;
+								//draw a triangle
+								shp = factory.getShape("polygon");
+								point0x = int.Parse(line[1]);
+								point0y = int.Parse(line[2]);
+								point1X = int.Parse(line[3]);
+								point1Y = int.Parse(line[4]);
+								point2X = int.Parse(line[5]);
+								point2Y = int.Parse(line[6]);
+								shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
+
+								shp.draw(g);
+								x = y + (width * 2);//this will dertermine the next position of x
+													//	y = x + (height * 2);
+								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+							}
+							else if (line[0].ToLower().Equals("drawto"))//completed
+							{
+
+
+								Pen myPen = new Pen(Color.Black, 5);
+								try
+								{
+									g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
+									//clears the picture box if user delete the shape from the text box
+									x = y + (width * 2);//this will dertermine the next position of x
+														//	y = x + (height * 2);
+									pictureBox.Refresh();
+								}
+								catch (Exception ex)
+								{
+									Console.WriteLine("An error occurred: '{0}'", ex);
+								}
+							}
+
+							else if (line[0].ToLower().Equals("moveto"))
+							{
+								//this will allow user to input integer alongside the moveTo word
+
+								x = int.Parse(line[1]);
+								y = int.Parse(line[2]);
+
+							}
+							else if (line[0].ToLower().Equals("penup"))
+							{
+								penDown = false; //this is for penup command
+
+							}
+							else if (line[0].ToLower().Equals("pendown"))
+							{
+								penDown = true; ////this is for pendown command
+							}
+							/*else if (line[0].ToLower().Equals("texture"))
+							{
+
+								try
+								{
+
+									Bitmap image1 = (Bitmap)Image.FromFile(
+										@"C:\Users\User\Pictures\Saved Pictures\sample.jpg", true);
+
+									TextureBrush texture = new TextureBrush(image1);
+									texture.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
+									Graphics formGraphics = this.CreateGraphics();
+									formGraphics.FillEllipse(texture,
+										new RectangleF(90.0F, 110.0F, 100, 100));
+									formGraphics.Dispose();
+
+								}
+								catch (System.IO.FileNotFoundException)
+								{
+									MessageBox.Show("There was an error opening the bitmap." +
+										"Please check the path.");
+								}
+							}*/
 						}
-						catch (Exception ex)
-						{
-							Console.WriteLine("An error occurred: '{0}'", ex);
-						}
-					}
-					
-					else if (line[0].ToLower().Equals("moveto"))
-					{
-						//this will allow user to input integer alongside the moveTo word
 						
-						x = int.Parse(line[1]);
-						y = int.Parse(line[2]);	
-						
-					}
-					else if (line[0].ToLower().Equals("penup"))
+					} catch(System.IndexOutOfRangeException ex)
 					{
-						penDown = false; //this is for penup command
+						Console.WriteLine("An error occurred: '{0}'", ex);
 
 					}
-					else if (line[0].ToLower().Equals("pendown"))
-					{
-						penDown = true; ////this is for pendown command
-					}
-
 					
-				}
+
+				}	
 
 				}
 				
 		}
 
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			String title = "About";
+			MessageBox.Show("Command lists\n\n penup \n pendown \n drawto x,y \n moveto x,y \n circle radius \n rectangle w,h \n square w,h \n triangle point1...point6 \n polygon point1..point6", title);
+		}
+
 		private void Form1_Load(object sender, EventArgs e)
 		{
-
 		}
 
 		//exit the program
@@ -212,10 +249,7 @@ namespace TurtleGraphics
 		}
 
 		private void pictureBox_Click(object sender, EventArgs e)
-			{
-
-		
-			
+		{			
 		}
 		//allows user to save drawing 
 		private void menuSave_Click(object sender, EventArgs e)
