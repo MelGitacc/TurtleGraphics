@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary> 
+/// this class is for the circle shape which will be called if user wants to draw circle
+/// </summary>
+
 namespace TurtleGraphics
 {
 	class Circle : Shape
@@ -29,7 +33,7 @@ namespace TurtleGraphics
 			this.radius = list[2];
 		}
 
-		//this ia to draw the circle and fill it with colour
+		//this is to draw the circle and fill it with colour
 		public override void draw(Graphics g)
 		{
 

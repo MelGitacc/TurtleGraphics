@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// this class will be called when user type specific shapes to draw 
+///if user type a shape, it will call its corresponding class and returns a new shape.
+/// </summary>
 namespace TurtleGraphics
 {
 	class ShapeFactory
 	{
-		//if user type a shape, it will call its corresponding class and returns a new shape.
+		
 		public Shape getShape(String shapeType)
 		{
 			//this is to allow user for any case combination

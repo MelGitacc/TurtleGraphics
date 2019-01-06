@@ -16,9 +16,10 @@ namespace TurtleGraphics
 {
 	public partial class Form1 : Form
 	{
-		
+		/// <summary> 
+		/// this variables will used for user inputs
+		/// <summary> 
 		bool penDown = true;
-
 		Color newColour = Color.LightBlue;//initialising new colour
 		int x ;//starting point 
 		int y;//starting point 
@@ -34,21 +35,26 @@ namespace TurtleGraphics
 			InitializeComponent();
 		}
 
-
+		/// <summary> 
+		/// this button method performs an important function for drawing shapes and lines
+		/// </summary>
 		private void RunButton_Click(object sender, EventArgs e)
 		{
+			//sets picturebox as drawing area
 			pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
+
 			//calls the shape factory
 			ShapeFactory factory = new ShapeFactory();
-				Shape shp;
-				String text = txtBox.Text;
+			Shape shp;
+			String text = txtBox.Text;
 			x = 0;
 			y = 0;
 			point0x = 0; point0y = 0; point1X = 0; point1Y = 0; point2X = 0; point2Y = 0; 
+
 			//this is going to split the lines in text box when useer type series of shapes
 			String[] cmdList = text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-			//this allow the shpaes to be display in picture box
+			//this allow the shapes to be display in picture box
 			using (var g = Graphics.FromImage(pictureBox.Image))
 			{
 				
@@ -56,8 +62,11 @@ namespace TurtleGraphics
 				{
 					MultiLine = cmdList[i];//store the current line in text box (for loop)
 
-					//split line using space for user to input value of x and y
-					String[] line = MultiLine.Split(new string[] { " ", " " }, StringSplitOptions.RemoveEmptyEntries);
+					/// <summary> 
+					/// splits line using space and comma for user to input the value of x and y
+					/// checks and catch exceptions
+					/// </summary>
+					String[] line = MultiLine.Split(new string[] { " ", " , " }, StringSplitOptions.RemoveEmptyEntries);
 					try
 					{
 						if (line[0].Length >= 1)
@@ -70,8 +79,8 @@ namespace TurtleGraphics
 								radius = int.Parse(line[1]);
 								shp.set(newColour, x, y, radius);//this is the bit where it is different for other shapes
 								shp.draw(g);
-								x = y + (radius * 2);//this will dertermine the next position of x
-
+								x = x + (radius * 2);//this will dertermine the next position of x
+								y = y + (radius * 2);
 								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 							}
 
@@ -82,10 +91,10 @@ namespace TurtleGraphics
 								shp = factory.getShape("rectangle");
 								width = int.Parse(line[1]);//
 								height = int.Parse(line[2]);
-								shp.set(Color.Violet, x, y, width, height);
+								shp.set(Color.Purple, x, y, width, height);
 								shp.draw(g);
-								x = y + (width * 2);
-								//y = x + (height * 2);//this will dertermine the next position of x
+								x = x + (width * 2);
+								y = y + (height * 2);//this will dertermine the next position of x
 								pictureBox.Refresh();
 
 							}
@@ -103,8 +112,8 @@ namespace TurtleGraphics
 								shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
 
 								shp.draw(g);
-								x = y + (width * 2);//this will dertermine the next position of x
-													//y = x + (height * 2);
+								x = x + (point0x * 2);//this will dertermine the next position of x
+								y = y + (point0y * 2);
 								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 							}
 							else if (line[0].ToLower().Equals("square"))
@@ -113,11 +122,11 @@ namespace TurtleGraphics
 								shp = factory.getShape("square");
 								width = int.Parse(line[1]);
 								height = int.Parse(line[2]);
-								shp.set(Color.LightSteelBlue, x, y, width, height);
+								shp.set(Color.Brown, x, y, width, height);
 
 								shp.draw(g);
-								x = y + (width * 2);//this will dertermine the next position of x
-													//y = x + (height * 2);
+								x = y + (point0x * 2);//this will dertermine the next position of x
+								y = y + (point0y * 2);
 								pictureBox.Refresh();// clears the picture box if user delete the shape from the text box
 							}
 							else if (line[0].ToLower().Equals("polygon"))
@@ -134,8 +143,8 @@ namespace TurtleGraphics
 								shp.set(Color.YellowGreen, x, y, point0x, point0y, point1X, point1Y, point2X, point2Y);
 
 								shp.draw(g);
-								x = y + (width * 2);//this will dertermine the next position of x
-													//	y = x + (height * 2);
+								x = x + (width * 2);//this will dertermine the next position of x
+								y = y + (height * 2);
 								pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 							}
 							else if (line[0].ToLower().Equals("drawto"))//completed
@@ -147,8 +156,8 @@ namespace TurtleGraphics
 								{
 									g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
 									//clears the picture box if user delete the shape from the text box
-									x = y + (width * 2);//this will dertermine the next position of x
-														//	y = x + (height * 2);
+									x = x + (width * 2);//this will dertermine the next position of x
+									y = y + (height * 2);
 									pictureBox.Refresh();
 								}
 								catch (Exception ex)
@@ -212,6 +221,9 @@ namespace TurtleGraphics
 				
 		}
 
+		/// <summary> 
+		/// this method displays the list of command when user click the "about" in menu bar 
+		/// </summary>
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			String title = "About";
@@ -222,13 +234,17 @@ namespace TurtleGraphics
 		{
 		}
 
-		//exit the program
+		/// <summary> 
+		///exits the program
+		/// </summary> 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
 
-		//allows user to open an image file 
+		/// <summary> 
+		///this will allow user to open an image file and displays it to the picturebox
+		/// </summary> 
 		private void menuOpen_Click(object sender, EventArgs e)
 		{
 			try
@@ -251,7 +267,9 @@ namespace TurtleGraphics
 		private void pictureBox_Click(object sender, EventArgs e)
 		{			
 		}
-		//allows user to save drawing 
+		/// <summary> 
+		/// this will allow user to save drawings
+		/// </summary> 
 		private void menuSave_Click(object sender, EventArgs e)
 		{
 			try

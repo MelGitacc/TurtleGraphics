@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary> 
+/// this class is for the square shape which will be called if user wants to draw square
+/// also, this class inherits the draw method for rectangle
+/// </summary> 
 namespace TurtleGraphics
 {
 	class Square :Rectangle
@@ -20,9 +24,12 @@ namespace TurtleGraphics
 		{
 			this.size = size;
 		}
-	
-		//since we are using Rectangle class, no need to implement this section as the draw method for rectangle
-		//will be inherited from here
+		/// <summary>
+		///since we are using Rectangle class, no need to implement this section as the draw method for rectangle
+		///will be inherited from here
+		/// </summary>
+		/// <param name="g"></param>
+
 		public override void draw(Graphics g)
 		{
 			base.draw(g);
