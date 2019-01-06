@@ -29,7 +29,7 @@ namespace TurtleGraphics
 		int height;//for rectangle
 		int size;
 		int point0x, point0y, point1X, point1Y, point2X, point2Y;
-
+		
 		public Form1()
 		{
 			InitializeComponent();
@@ -149,16 +149,14 @@ namespace TurtleGraphics
 							}
 							else if (line[0].ToLower().Equals("drawto"))//completed
 							{
-
-
 								Pen myPen = new Pen(Color.Black, 5);
 								try
 								{
 									g.DrawLine(myPen, x, y, int.Parse(line[1]), int.Parse(line[2]));
-									//clears the picture box if user delete the shape from the text box
+
 									x = x + (width * 2);//this will dertermine the next position of x
 									y = y + (height * 2);
-									pictureBox.Refresh();
+									pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
 								}
 								catch (Exception ex)
 								{
@@ -183,30 +181,78 @@ namespace TurtleGraphics
 							{
 								penDown = true; ////this is for pendown command
 							}
-							/*else if (line[0].ToLower().Equals("texture"))
+
+			
+///<summary>
+/// this method will be called when user input repeat command
+/// the repeat have length of 5 for example (repeat 4 circle + 10) 
+/// </summary>
+
+				else if (line[0].Equals("repeat"))
 							{
-
-								try
+								if (line[0].Length >= 5)
 								{
+									if (line[2].Equals("circle"))
+									{
+											int rd = int.Parse(line[1]);//this is the value in whihch user will input
+											int radius2;//store the ravalue of radius
 
-									Bitmap image1 = (Bitmap)Image.FromFile(
-										@"C:\Users\User\Pictures\Saved Pictures\sample.jpg", true);
+											if (line[4].Equals("radius"))
+											{
+												radius2 = radius;
+											}
+											else
+											{
+												radius2 = int.Parse(line[4]);
+											}
+											for (int v = 0; v < rd; v++) //repeat loop to draw circle
+											{
+												//draw circle
+												shp = factory.getShape("circle");
+												if (line[3][0] == '+')
+												{
 
-									TextureBrush texture = new TextureBrush(image1);
-									texture.WrapMode = System.Drawing.Drawing2D.WrapMode.Tile;
-									Graphics formGraphics = this.CreateGraphics();
-									formGraphics.FillEllipse(texture,
-										new RectangleF(90.0F, 110.0F, 100, 100));
-									formGraphics.Dispose();
+													shp.set(newColour, x, y, radius + (v * 5));//this is the bit where it is different for other shapes
+												}
+												else
+												{
+													shp.set(newColour, x, y, radius + (v * 5));//this is the bit where it is different for other shapes
+												}
 
-								}
-								catch (System.IO.FileNotFoundException)
-								{
-									MessageBox.Show("There was an error opening the bitmap." +
-										"Please check the path.");
-								}
-							}*/
+												shp.draw(g);
+
+												pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+								}//end of for loop
+						   }
+					
+					}
+
+				}//end of else if
+
+
+									else if (line[0].ToLower().Equals("texture"))
+									{
+
+										try
+										{
+
+											//Bitmap image1 = (Bitmap)Image.FromFile("sample.jpg",true);
+											Bitmap image1 = (Bitmap)Image.FromFile("..\\..\\TurtleGraphics\\images\\sample.jpg");
+											TextureBrush texture = new TextureBrush(image1);
+											texture.WrapMode = WrapMode.Tile;
+											//Graphics formGraphics = this.CreateGraphics();
+											g.FillEllipse(texture,
+												new RectangleF(90.0F, 110.0F, 100, 100));
+											g.Dispose();
+
+										}
+										catch (FileNotFoundException)
+										{
+											MessageBox.Show("There was an error opening the bitmap." +
+												"Please check the path.");
+										}
 						}
+					}
 						
 					} catch(System.IndexOutOfRangeException ex)
 					{

@@ -39,7 +39,7 @@ namespace TurtleGraphics
 
 			Pen p = new Pen(Color.Black, 2);
 			SolidBrush b = new SolidBrush(colour);
-			g.FillEllipse(b, x, y, radius * 2, radius * 2);
+			//g.FillEllipse(b, x, y, radius * 2, radius * 2);
 			g.DrawEllipse(p, x, y, radius * 2, radius * 2);
 
 		}
