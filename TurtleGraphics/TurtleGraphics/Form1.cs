@@ -182,85 +182,111 @@ namespace TurtleGraphics
 								penDown = true; ////this is for pendown command
 							}
 
-			
-///<summary>
-/// this method will be called when user input repeat command
-/// the repeat have length of 5 for example (repeat 4 circle + 10) 
-/// </summary>
 
-				else if (line[0].Equals("repeat"))
+							///<summary>
+							/// this method will be called when user input repeat command
+							/// the repeat have length of 5 for example (repeat 4 circle + 10) 
+							/// </summary>
+
+							else if (line[0].ToLower().Equals("repeat"))
 							{
 								if (line[0].Length >= 5)
 								{
-									if (line[2].Equals("circle"))
+									if (line[2].ToLower().Equals("circle"))
 									{
-											int rd = int.Parse(line[1]);//this is the value in whihch user will input
-											int radius2;//store the ravalue of radius
+										int rd = int.Parse(line[1]);//this is the value in whihch user will input
+										int radius2;//store the ravalue of radius
 
-											if (line[4].Equals("radius"))
+										if (line[4].ToLower().Equals("radius"))
+										{
+											radius2 = radius;
+										}
+										else
+										{
+											radius2 = int.Parse(line[4]);
+										}
+										for (int v = 0; v < rd; v++) //repeat loop to draw circle
+										{
+											//draw circle
+											shp = factory.getShape("circle");
+											if (line[3][0] == '+')
 											{
-												radius2 = radius;
+
+												shp.set(newColour, x, y, radius + (v * 5));//this is the bit where it is different for other shapes
 											}
 											else
 											{
-												radius2 = int.Parse(line[4]);
+												shp.set(newColour, x, y, radius - (v * 5));//this is the bit where it is different for other shapes
 											}
-											for (int v = 0; v < rd; v++) //repeat loop to draw circle
-											{
-												//draw circle
-												shp = factory.getShape("circle");
-												if (line[3][0] == '+')
-												{
 
-													shp.set(newColour, x, y, radius + (v * 5));//this is the bit where it is different for other shapes
-												}
-												else
-												{
-													shp.set(newColour, x, y, radius + (v * 5));//this is the bit where it is different for other shapes
-												}
+											shp.draw(g);
 
-												shp.draw(g);
+											pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+										}//end of for loop
+									}
 
-												pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
-								}//end of for loop
-						   }
-					
-					}
+								}
+							}//end of else if of repeat
+							 /*	 //for rectangle repeat
 
-				}//end of else if
+								 else if (line[0].Length == 6)
+									 {
+										 if (line[2].ToLower().Equals("rectangle"))
+										 {
+											 int rd = int.Parse(line[1]);//this is the value in whihch user will input
+											 int wd2;//store the value of width
+											 int ht2;//height
 
+											 if (line[4].ToLower().Equals("width"))
+											 {
+												 wd2 = width;
+												 ht2 = height;
+											 }
+											 else
+											 {
+												 wd2 = int.Parse(line[4]);
+												 ht2 = int.Parse(line[5]);
+											 }
+											 if (line[6].ToLower().Equals("height"))
+											 {
+												 ht2 = height;
+											 }
+											 else
+											 {
+												 ht2 = int.Parse(line[5]);
+											 }
 
-									else if (line[0].ToLower().Equals("texture"))
-									{
+											 for (int v = 0; v < rd; v++) //repeat loop to draw circle
+											 {
+												 //draw circle
+												 shp = factory.getShape("rectangle");
+												 if (line[3][5] == '+')
+												 {
 
-										try
-										{
+													 shp.set(newColour, x, y, width, height + (v * 5));//this is the bit where it is different for other shapes
+												 }
+												 else
+												 {
+													 shp.set(newColour, x, y, width, height - (v * 5));//this is the bit where it is different for other shapes
+												 }
 
-											//Bitmap image1 = (Bitmap)Image.FromFile("sample.jpg",true);
-											Bitmap image1 = (Bitmap)Image.FromFile("..\\..\\TurtleGraphics\\images\\sample.jpg");
-											TextureBrush texture = new TextureBrush(image1);
-											texture.WrapMode = WrapMode.Tile;
-											//Graphics formGraphics = this.CreateGraphics();
-											g.FillEllipse(texture,
-												new RectangleF(90.0F, 110.0F, 100, 100));
-											g.Dispose();
+												 shp.draw(g);
 
-										}
-										catch (FileNotFoundException)
-										{
-											MessageBox.Show("There was an error opening the bitmap." +
-												"Please check the path.");
-										}
+												 pictureBox.Refresh();//clears the picture box if user delete the shape from the text box
+											 }//end of for loop
+										 }
+
+									 }
+
+								 }//end of else if statement for rectangle*/
+
 						}
-					}
-						
 					} catch(System.IndexOutOfRangeException ex)
 					{
 						Console.WriteLine("An error occurred: '{0}'", ex);
 
 					}
-					
-
+				
 				}	
 
 				}
