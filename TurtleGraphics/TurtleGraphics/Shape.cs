@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary> 
-/// this class inherits the shape interface class which needs to be implemented here
-/// </summary> 
+
 
 namespace TurtleGraphics
 {
+	/// <summary> 
+	/// this class inherits the shape interface class which needs to be implemented here
+	/// </summary> 
 	abstract class Shape : Shapes
 	{
 		protected Color colour; //shape's colour
-		protected int x, y; 
+		protected int x, y;
 
 		public Shape()
 		{
@@ -28,14 +29,14 @@ namespace TurtleGraphics
 			this.colour = colour; //shapes colour
 			this.x = x; // x position
 			this.y = y; // y position
-						
+
 		}
 		/// <summary> 
 		/// the method below is from the ShapesInterface 
 		//draw method is declared as an abstract which must be implemented
 		///any derrived class must implement this method
 		/// /<summary> 
-		public abstract void draw(Graphics g); 
+		public abstract void draw(Graphics g);
 
 		/// <summary> 
 		///set is declared as virtual so it can be overridden by a more specific child version
@@ -50,4 +51,4 @@ namespace TurtleGraphics
 		}
 	}
 
-	}
+}

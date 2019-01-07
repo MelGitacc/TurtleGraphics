@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary> 
-/// this class is for the polygon shape which will be called if user wants to draw polygon
-/// </summary> 
+ 
 namespace TurtleGraphics
-{
+{/// <summary> 
+ /// this class is for the polygon shape which will be called if user wants to draw polygon
+ /// </summary>
 	class Polygon : Shape
 	{
 		Point[] points;

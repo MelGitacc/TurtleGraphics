@@ -14,6 +14,10 @@ using System.Windows.Forms;
 
 namespace TurtleGraphics
 {
+	/// <summary>
+	/// This is the main class for execution of the code for shapes
+	/// allowing user to perform commands for shapes
+	/// </summary>
 	public partial class Form1 : Form
 	{
 		/// <summary> 

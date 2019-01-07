@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary> 
-/// this class is for the rectangle shape which will be called if user wants to draw rectangle
-/// </summary>
+
 namespace TurtleGraphics
-{
-	class Rectangle: Shape
+{/// <summary> 
+ /// this class is for the rectangle shape which will be called if user wants to draw rectangle
+ /// </summary>
+	class Rectangle : Shape
 	{
 		//variables used to store value of width and height of rectangle
 		int width, height;

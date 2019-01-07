@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary> 
-/// this class is for the square shape which will be called if user wants to draw square
-/// also, this class inherits the draw method for rectangle
-/// </summary> 
+ 
 namespace TurtleGraphics
 {
+	/// <summary> 
+	/// this class is for the square shape which will be called if user wants to draw square
+	/// also, this class inherits the draw method for rectangle
+	/// </summary>
 	class Square :Rectangle
 	{
 		private int size;

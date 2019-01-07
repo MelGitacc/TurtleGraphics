@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TurtleGraphics
-{
+{/// <summary>
+ /// The main entry point for the application.
+ /// </summary>
 	static class Program
 	{
 		/// <summary>
